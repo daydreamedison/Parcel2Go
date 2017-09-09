@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Parcel2Go</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_place_order_address">PlaceOrderAddressActivity</string>
+    <string name="title_activity_price_comparison">PriceComparisonActivity</string>
+    <string name="title_activity_login">Login</string>
+
+    <string-array name="quantity">
+        <item>1</item>
+        <item> &lt;5</item>
+        <item> &lt;10</item>
+        <item> &lt;20</item>
+        <item> &gt;20</item>
+    </string-array>
+</resources>

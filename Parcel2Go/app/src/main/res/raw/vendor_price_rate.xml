@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <vendor name="Pos Laju" estimatetime="2">
+        <Parcel>
+            <pricerate weight="5" rate="3"></pricerate>
+        </Parcel>
+        <Document>
+            <pricerate weight="5" rate="50"></pricerate>
+        </Document>
+    </vendor>
+    <vendor name="GDex" estimatetime="2">
+        <Parcel>
+            <pricerate weight="5" rate="3"></pricerate>
+        </Parcel>
+        <Document>
+            <pricerate weight="5" rate="50"></pricerate>
+        </Document>
+    </vendor>
+    <vendor name="Skynet" estimatetime="2">
+        <Parcel>
+            <pricerate weight="5" rate="3"></pricerate>
+        </Parcel>
+        <Document>
+            <pricerate weight="5" rate="50"></pricerate>
+        </Document>
+    </vendor>
+    <vendor name="Kangaroo" estimatetime="2">
+        <Parcel>
+            <pricerate weight="5" rate="3"></pricerate>
+        </Parcel>
+        <Document>
+            <pricerate weight="5" rate="50"></pricerate>
+        </Document>
+    </vendor>
+</resources>
