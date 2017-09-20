@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by Sam on 7/15/2017.
  */
 
-public class PlaceOrderObject implements Serializable{
+public class ItemList implements Serializable{
     public Map<String, Integer> orderItems;
     public String itemDescription;
     public String pickUpLocation;

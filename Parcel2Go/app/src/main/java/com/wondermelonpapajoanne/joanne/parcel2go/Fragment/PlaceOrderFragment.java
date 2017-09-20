@@ -8,19 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer.PlaceOrderAddressActivity;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.PlaceOrderObject;
+import com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer.InputSenderInformationAndReceiverActivity;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.DeliveryItem;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.Item;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
+import com.wondermelonpapajoanne.joanne.parcel2go.Utility.ItemTypeConstants;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlaceOrderFragment extends Fragment {
 
@@ -67,15 +68,16 @@ public class PlaceOrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_place_order, container, false);
 
+        //set up all the elements
         documentItem = (Button) view.findViewById(R.id.button_document);
         luggageItem = (Button) view.findViewById(R.id.button_luggage);
         parcelItem = (Button) view.findViewById(R.id.button_parcel);
         orderDescription = (EditText) view.findViewById(R.id.edit_text_order_description);
         documentItemQuantity = (Spinner) view.findViewById(R.id.spinner_document_quantity);
         luggageItemQuantity = (Spinner) view.findViewById(R.id.spinner_luggage_quantity);
-        luggageItemQuantity = (Spinner) view.findViewById(R.id.spinner_luggage_quantity);
         parcelItemQuantity = (Spinner) view.findViewById(R.id.spinner_parcel_quantity);
 
+        //test data dummy data
         isDocumentBtnChecked = false;
         documentQuantity = 0;
         documentItem = (Button) view.findViewById(R.id.button_document);
@@ -127,7 +129,7 @@ public class PlaceOrderFragment extends Fragment {
             }
         });
 
-        //set spinner drop down
+        //set up quantity dropdown list
         ArrayAdapter<CharSequence> itemQuantityAdapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.quantity, android.R.layout.simple_spinner_item);
         itemQuantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -144,17 +146,34 @@ public class PlaceOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Map<String, Integer> orderItem = new HashMap<String, Integer>();
-                orderItem.put("Document", documentQuantity);
-                orderItem.put("Parcel", parcelQuantity);
-                orderItem.put("luggage", luggageQuantity);
+/*                Map<String, Integer> orderItem = new HashMap<String, Integer>();
+                orderItem.put(ItemTypeConstants.DOCUMENT, documentQuantity);
+                orderItem.put(ItemTypeConstants.PARCEL, parcelQuantity);
+                orderItem.put(ItemTypeConstants.LUGGAGE, luggageQuantity);
 
-                PlaceOrderObject placeOrder = new PlaceOrderObject();
+                ItemList placeOrder = new ItemList();
                 placeOrder.orderItems = orderItem;
-                placeOrder.itemDescription = orderDescription.getText().toString();
-                //placeOrder.itemDescription = "hahaha";
+                placeOrder.itemDescription = orderDescription.getText().toString();*/
 
-                GotoPlaceOrderAddressFragment(placeOrder);
+                Item Document = new Item();
+                Document.Type = ItemTypeConstants.DOCUMENT_TYPE;
+                //Document.Quantity = documentItemQuantity.getSelectedItem().toString();
+                Document.Quantity = 5;
+
+                Item Parcel = new Item();
+                Parcel.Type = ItemTypeConstants.PARCEL_TYPE;
+                Parcel.Quantity = 10;
+
+                Item Luggage = new Item();
+                Luggage.Type = ItemTypeConstants.LUGGAGE_TYPE;
+                Luggage.Quantity = 3;
+
+                DeliveryItem deliveryItem = new DeliveryItem();
+                deliveryItem._itemDescription = orderDescription.getText().toString();
+                deliveryItem._documentItem = Document;
+                deliveryItem._lugaggeItem = Luggage;
+                deliveryItem._parcelItem = Parcel;
+                InputSenderAndReceiverInformationPage(deliveryItem);
             }
         });
 
@@ -163,9 +182,10 @@ public class PlaceOrderFragment extends Fragment {
 
 
 
-    private void GotoPlaceOrderAddressFragment(PlaceOrderObject placeOrder){
-        Intent intent = new Intent(PlaceOrderFragment.this.getActivity(), PlaceOrderAddressActivity.class);
-        intent.putExtra("placeorder", (Serializable) placeOrder);
+    private void InputSenderAndReceiverInformationPage(DeliveryItem deliveryItem){
+        Intent intent = new Intent(PlaceOrderFragment.this.getActivity(), InputSenderInformationAndReceiverActivity.class);
+        intent.putExtra(ItemTypeConstants.DeliveryItem, deliveryItem);
+
         PlaceOrderFragment.this.startActivity(intent);
     }
 
