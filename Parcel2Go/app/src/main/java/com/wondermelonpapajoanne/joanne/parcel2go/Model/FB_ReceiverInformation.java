@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Sam on 9/16/2017.
  */
 
-public class ReceiverInformation implements Serializable{
+public class FB_ReceiverInformation implements Serializable{
 
     public String Name;
     public String Address;

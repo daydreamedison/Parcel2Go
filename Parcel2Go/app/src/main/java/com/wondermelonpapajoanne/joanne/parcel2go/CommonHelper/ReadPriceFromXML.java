@@ -3,7 +3,7 @@ package com.wondermelonpapajoanne.joanne.parcel2go.CommonHelper;
 import android.util.Xml;
 
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.ItemObject;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorObject;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorPriceRate;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ReadPriceFromXML {
 
-    public List<VendorObject> GetAllVendorsPriceRate(InputStream in) throws XmlPullParserException, IOException {
+    public List<VendorPriceRate> GetAllVendorsPriceRate(InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -30,8 +30,8 @@ public class ReadPriceFromXML {
         }
     }
 
-    private List<VendorObject> readResources(XmlPullParser parser) throws XmlPullParserException, IOException {
-        List<VendorObject> vendors = new ArrayList<VendorObject>();
+    private List<VendorPriceRate> readResources(XmlPullParser parser) throws XmlPullParserException, IOException {
+        List<VendorPriceRate> vendors = new ArrayList<VendorPriceRate>();
         int eventType = parser.getEventType();
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if(eventType == XmlPullParser.START_DOCUMENT) {
@@ -47,9 +47,9 @@ public class ReadPriceFromXML {
         return vendors;
     }
 
-    private VendorObject readVendor(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private VendorPriceRate readVendor(XmlPullParser parser) throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();
-        VendorObject vendor = new VendorObject();
+        VendorPriceRate vendor = new VendorPriceRate();
 
         while(eventType != XmlPullParser.END_DOCUMENT)
         {

@@ -11,11 +11,10 @@ import android.widget.ListView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wondermelonpapajoanne.joanne.parcel2go.CommonHelper.ReadPriceFromXML;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.DeliveryInformation;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.DeliveryItem;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.ItemList;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.ReceiverInformation;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorObject;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryInformation;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryItem;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_ReceiverInformation;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorPriceRate;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 import com.wondermelonpapajoanne.joanne.parcel2go.RowAdapterHelper.VendorPriceComparisonAdapter;
 import com.wondermelonpapajoanne.joanne.parcel2go.Utility.FirebaseTableConstant;
@@ -23,7 +22,6 @@ import com.wondermelonpapajoanne.joanne.parcel2go.Utility.ItemTypeConstants;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PriceComparisonActivity extends AppCompatActivity {
@@ -40,16 +38,16 @@ public class PriceComparisonActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = this.getIntent();
-        ReceiverInformation receiverInformation = (ReceiverInformation) intent.getSerializableExtra(ItemTypeConstants.ReceiverInformation);
-        ReceiverInformation senderInformation = (ReceiverInformation) intent.getSerializableExtra(ItemTypeConstants.SenderInformation);
-        DeliveryItem deliveryItem = (DeliveryItem) intent.getSerializableExtra(ItemTypeConstants.DeliveryItem);
+        FB_ReceiverInformation receiverInformation = (FB_ReceiverInformation) intent.getSerializableExtra(ItemTypeConstants.ReceiverInformation);
+        FB_ReceiverInformation senderInformation = (FB_ReceiverInformation) intent.getSerializableExtra(ItemTypeConstants.SenderInformation);
+        FB_DeliveryItem deliveryItem = (FB_DeliveryItem) intent.getSerializableExtra(ItemTypeConstants.DeliveryItem);
 
-        final DeliveryInformation deliveryInformation = new DeliveryInformation();
+        final FB_DeliveryInformation deliveryInformation = new FB_DeliveryInformation();
         deliveryInformation._deliveryItem = deliveryItem;
         deliveryInformation._receiverInfo = receiverInformation;
         deliveryInformation._senderInfo = senderInformation;
 
-        List<VendorObject> allVendorObject = new ArrayList<VendorObject>();
+        List<VendorPriceRate> allVendorPriceRate = new ArrayList<VendorPriceRate>();
 
         btnContinue = (Button) findViewById(R.id.button_continue_placeorder);
         btnContinue.setOnClickListener(new View.OnClickListener(){
@@ -68,29 +66,22 @@ public class PriceComparisonActivity extends AppCompatActivity {
 
             if(in != null) {
                 ReadPriceFromXML xml = new ReadPriceFromXML();
-                allVendorObject = xml.GetAllVendorsPriceRate(in);
+                allVendorPriceRate = xml.GetAllVendorsPriceRate(in);
             }
 
             final VendorPriceComparisonAdapter adapter = new VendorPriceComparisonAdapter(this.getApplicationContext(),
-                    allVendorObject);
+                    allVendorPriceRate);
             ListView listView = (ListView) this.findViewById(R.id.confirmation_item_list);
             listView.setAdapter(adapter);
         }
         catch(Exception ex){ }
     }
 
-    private void writeNewData(DeliveryInformation deliveryInformation)
+    private void writeNewData(FB_DeliveryInformation deliveryInformation)
     {
-        DatabaseReference example = mDatabase.child(FirebaseTableConstant.AllDeliveryList);
-
-/*
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", "sam");
-        result.put("password", "asdf1234");
-*/
-
+        DatabaseReference db = mDatabase.child(FirebaseTableConstant.AllDeliveryList);
         String key = mDatabase.child(FirebaseTableConstant.AllDeliveryList).push().getKey();
-        example.child(key).setValue(deliveryInformation);
+        db.child(key).setValue(deliveryInformation);
     }
 
 

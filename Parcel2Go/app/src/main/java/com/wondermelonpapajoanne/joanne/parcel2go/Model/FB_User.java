@@ -4,12 +4,12 @@ package com.wondermelonpapajoanne.joanne.parcel2go.Model;
  * Created by Sam on 7/24/2017.
  */
 
-public class DBUser {
+public class FB_User {
 
-    public String name;
+    public int account_type;
     public String email;
-    public String id;
+    public Long id;
+    public String name;
     public String password;
-    public String account_type;
     public Boolean status;
 }

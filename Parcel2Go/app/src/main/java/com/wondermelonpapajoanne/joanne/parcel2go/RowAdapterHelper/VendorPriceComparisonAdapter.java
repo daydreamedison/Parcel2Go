@@ -1,15 +1,13 @@
 package com.wondermelonpapajoanne.joanne.parcel2go.RowAdapterHelper;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorObject;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.VendorPriceRate;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 
 import java.util.List;
@@ -18,12 +16,12 @@ import java.util.List;
  * Created by Sam on 7/23/2017.
  */
 
-public class VendorPriceComparisonAdapter extends ArrayAdapter<VendorObject>{
+public class VendorPriceComparisonAdapter extends ArrayAdapter<VendorPriceRate>{
 
     private final Context context;
-    private List<VendorObject> vendorList;
+    private List<VendorPriceRate> vendorList;
 
-    public VendorPriceComparisonAdapter(Context context, List<VendorObject> vendorList){
+    public VendorPriceComparisonAdapter(Context context, List<VendorPriceRate> vendorList){
         super(context, R.layout.activity_price_comparison_item, vendorList);
 
         this.context = context;

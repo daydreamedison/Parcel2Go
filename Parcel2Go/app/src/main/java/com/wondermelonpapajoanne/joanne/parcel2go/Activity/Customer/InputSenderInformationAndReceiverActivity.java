@@ -8,15 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.DeliveryInformation;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.DeliveryItem;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.Item;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.ItemList;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.ReceiverInformation;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryItem;
+import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_ReceiverInformation;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 import com.wondermelonpapajoanne.joanne.parcel2go.Utility.ItemTypeConstants;
-
-import java.io.Serializable;
 
 public class InputSenderInformationAndReceiverActivity extends AppCompatActivity {
 
@@ -29,7 +24,7 @@ public class InputSenderInformationAndReceiverActivity extends AppCompatActivity
     private EditText receiverCity;
 
     //init object
-    DeliveryItem deliveryItem;
+    FB_DeliveryItem deliveryItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +34,7 @@ public class InputSenderInformationAndReceiverActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         Intent intent = this.getIntent();
-        deliveryItem = (DeliveryItem) intent.getSerializableExtra(ItemTypeConstants.DeliveryItem);
+        deliveryItem = (FB_DeliveryItem) intent.getSerializableExtra(ItemTypeConstants.DeliveryItem);
 
         //Sender Information
         street = (EditText) findViewById(R.id.edit_text_street);
@@ -55,34 +50,22 @@ public class InputSenderInformationAndReceiverActivity extends AppCompatActivity
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
- /*               String location = street.getText().toString() + " " + city.getText().toString();
-                String dropOffLocation = receiverStreet.getText().toString()
-                        + " " + receiverCity.getText().toString();*/
 
-                /*placeOrder.pickUpLocation = location;
-                placeOrder.dropOffUsername = receiverName.getText().toString();
-                placeOrder.dropOffPhonenumber = receiverPhonenumber.getText().toString();
-                placeOrder.dropOffLocation = dropOffLocation;*/
-
-                ReceiverInformation sender = new ReceiverInformation();
+                FB_ReceiverInformation sender = new FB_ReceiverInformation();
                 sender.Name = "joanne";
                 sender.ContactNumber = "111";
                 sender.Address = street.getText().toString() + " " + city.getText().toString();
 
-                ReceiverInformation receiver = new ReceiverInformation();
+                FB_ReceiverInformation receiver = new FB_ReceiverInformation();
                 receiver.Name = receiverName.getText().toString();
                 receiver.Address = receiverStreet.getText().toString() + "" + receiverCity.getText().toString();
                 receiver.ContactNumber = receiverPhonenumber.getText().toString();
-
-
-//                DeliveryInformation deliveryInformation = new DeliveryInformation(sender, receiver);
-//                deliveryInformation.SaveDeliveryItem(deliveryItem);
                 GotoPriceComparisonActivity(sender, receiver, deliveryItem);
             }
         });
     }
 
-    private void GotoPriceComparisonActivity(ReceiverInformation sender, ReceiverInformation receiver, DeliveryItem deliveryItem)
+    private void GotoPriceComparisonActivity(FB_ReceiverInformation sender, FB_ReceiverInformation receiver, FB_DeliveryItem deliveryItem)
     {
         Intent intent = new Intent(InputSenderInformationAndReceiverActivity.this, PriceComparisonActivity.class);
         intent.putExtra(ItemTypeConstants.SenderInformation, sender);

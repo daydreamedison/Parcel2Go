@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Sam on 7/16/2017.
  */
 
-public class VendorObject {
+public class VendorPriceRate {
     public String name;
     public String estimateDeliveryTime;
     public ItemObject Parcel;

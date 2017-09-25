@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Sam on 9/16/2017.
  */
 
-public class DeliveryItem implements Serializable{
+public class FB_DeliveryItem implements Serializable{
 
     public Item _documentItem;
     public Item _parcelItem;
