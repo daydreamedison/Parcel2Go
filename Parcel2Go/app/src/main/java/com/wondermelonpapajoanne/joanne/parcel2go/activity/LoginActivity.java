@@ -1,8 +1,6 @@
-package com.wondermelonpapajoanne.joanne.parcel2go.Activity;
+package com.wondermelonpapajoanne.joanne.parcel2go.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +19,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer.MainActivity;
+import com.wondermelonpapajoanne.joanne.parcel2go.activity.customer.MainActivity;
 import com.wondermelonpapajoanne.joanne.parcel2go.DatabaseHandler.FirebaseHelper;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_User;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.wondermelonpapajoanne.joanne.parcel2go.Utility.FirebaseTableConstant;
+import com.wondermelonpapajoanne.joanne.parcel2go.activity.driver.DriverMainActivity;
 
 /**
  * Created by Sam on 7/29/2017.
@@ -57,8 +54,7 @@ public class LoginActivity extends AppCompatActivity{
 
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            GetUserAccountType(auth.getCurrentUser().getEmail());
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -154,7 +150,7 @@ public class LoginActivity extends AppCompatActivity{
         if(user.email.equals(email)){
             if(user.account_type == FirebaseTableConstant.Driver)
             {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, DriverMainActivity.class));
                 finish();
             }
             else

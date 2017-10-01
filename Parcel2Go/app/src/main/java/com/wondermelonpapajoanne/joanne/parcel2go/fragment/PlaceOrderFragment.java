@@ -1,4 +1,4 @@
-package com.wondermelonpapajoanne.joanne.parcel2go.Fragment;
+package com.wondermelonpapajoanne.joanne.parcel2go.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer.InputSenderInformationAndReceiverActivity;
+import com.wondermelonpapajoanne.joanne.parcel2go.activity.customer.InputSenderInformationAndReceiverActivity;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryItem;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.Item;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
@@ -63,7 +63,7 @@ public class PlaceOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_place_order, container, false);
+        View view = inflater.inflate(R.layout.customer_fragment_place_order, container, false);
 
         //set up all the elements
         documentItemBtn = (Button) view.findViewById(R.id.button_document);

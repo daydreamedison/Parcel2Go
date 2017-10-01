@@ -1,10 +1,8 @@
-package com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer;
+package com.wondermelonpapajoanne.joanne.parcel2go.activity.customer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -17,9 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.wondermelonpapajoanne.joanne.parcel2go.Activity.LoginActivity;
-import com.wondermelonpapajoanne.joanne.parcel2go.Fragment.PlaceOrderFragment;
+import com.wondermelonpapajoanne.joanne.parcel2go.activity.LoginActivity;
+import com.wondermelonpapajoanne.joanne.parcel2go.fragment.PlaceOrderFragment;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 
 public class MainActivity extends AppCompatActivity
@@ -35,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.customer_activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -144,47 +141,6 @@ public class MainActivity extends AppCompatActivity
                 }
         );
     }
-
-    /*@SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Fragment fragment = null;
-
-        switch(id)
-        {
-            case R.id.nav_place_order:
-                fragment = new PlaceOrderFragment();
-                break;
-            case R.id.nav_booking_status:
-                break;
-            case R.id.nav_track_delivery_status:
-                break;
-            case R.id.nav_histories_order:
-                break;
-            case R.id.nav_my_profile:
-                break;
-            case R.id.nav_about_us:
-                break;
-            case R.id.nav_logout:
-                logout();
-                return true;
-            default:
-                fragment = new PlaceOrderFragment();
-        }
-
-        if(fragment != null){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-        }
-
-        item.setChecked(true);
-        //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawers();
-        //drawerLayout.closeDrawers();
-        return true;
-    }*/
 
     @Override
     public void onPlaceOrderFragmentInteraction(Uri uri) {

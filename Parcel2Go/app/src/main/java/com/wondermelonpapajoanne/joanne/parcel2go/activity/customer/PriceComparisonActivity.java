@@ -1,4 +1,4 @@
-package com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer;
+package com.wondermelonpapajoanne.joanne.parcel2go.activity.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ public class PriceComparisonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_price_comparison);
+        setContentView(R.layout.customer_activity_price_comparison);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

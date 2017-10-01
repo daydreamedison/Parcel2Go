@@ -10,13 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.Customer.MainActivity"
+            android:name=".activity.customer.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
-
         </activity>
+
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.driver.DriverMainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,15 +31,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Customer.InputSenderInformationAndReceiverActivity"
+            android:name=".activity.customer.InputSenderInformationAndReceiverActivity"
             android:label="@string/title_activity_place_order_address"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.Customer.PriceComparisonActivity"
+            android:name=".activity.customer.PriceComparisonActivity"
             android:label="@string/title_activity_price_comparison"
             android:theme="@style/AppTheme"></activity>
 
-        <activity android:name=".Activity.RegisterActivity"
+        <activity android:name=".activity.RegisterActivity"
             android:label="RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

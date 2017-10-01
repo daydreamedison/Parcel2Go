@@ -22,7 +22,7 @@ public class VendorPriceComparisonAdapter extends ArrayAdapter<VendorPriceRate>{
     private List<VendorPriceRate> vendorList;
 
     public VendorPriceComparisonAdapter(Context context, List<VendorPriceRate> vendorList){
-        super(context, R.layout.activity_price_comparison_item, vendorList);
+        super(context, R.layout.customer_activity_price_comparison_item, vendorList);
 
         this.context = context;
         this.vendorList = vendorList;
@@ -33,7 +33,7 @@ public class VendorPriceComparisonAdapter extends ArrayAdapter<VendorPriceRate>{
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.activity_price_comparison_item, parent, false);
+        View rowView = inflater.inflate(R.layout.customer_activity_price_comparison_item, parent, false);
 
         TextView vendorNameTextView = (TextView) rowView.findViewById(R.id.vendor_name);
         TextView documentPriceRateTextView = (TextView) rowView.findViewById(R.id.document_price_rate);

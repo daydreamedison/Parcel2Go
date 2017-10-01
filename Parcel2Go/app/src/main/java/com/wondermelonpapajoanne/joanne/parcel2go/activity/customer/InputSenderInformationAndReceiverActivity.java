@@ -1,4 +1,4 @@
-package com.wondermelonpapajoanne.joanne.parcel2go.Activity.Customer;
+package com.wondermelonpapajoanne.joanne.parcel2go.activity.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ public class InputSenderInformationAndReceiverActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_place_order_address);
+        setContentView(R.layout.customer_activity_place_order_address);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
