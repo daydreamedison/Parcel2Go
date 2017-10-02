@@ -2,11 +2,12 @@
 
     <style name="AppTheme" parent="Base.MyTheme"></style>
 
-    <style name="Base.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.MyTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/colorPrimaryRed</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkGreen</item>
+        <item name="colorPrimary">@color/colorPrimaryDarkGreen</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

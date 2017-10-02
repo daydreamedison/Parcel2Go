@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/colorPrimaryRed"
+    android:theme="@style/AppTheme"
     android:fitsSystemWindows="true">
 
     <ProgressBar

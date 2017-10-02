@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.wondermelonpapajoanne.joanne.parcel2go.activity.LoginActivity;
@@ -39,8 +40,12 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close) {
+        };
         drawerToggle.setDrawerIndicatorEnabled(false);
         drawerLayout.addDrawerListener(drawerToggle);
         Menu menu = navigationView.getMenu();

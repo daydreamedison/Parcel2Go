@@ -37,7 +37,7 @@
         <activity
             android:name=".activity.customer.PriceComparisonActivity"
             android:label="@string/title_activity_price_comparison"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
         <activity android:name=".activity.RegisterActivity"
             android:label="RegisterActivity"
