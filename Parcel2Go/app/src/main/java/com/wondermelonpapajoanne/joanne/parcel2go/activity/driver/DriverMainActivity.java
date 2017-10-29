@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 import com.wondermelonpapajoanne.joanne.parcel2go.activity.LoginActivity;
+import com.wondermelonpapajoanne.joanne.parcel2go.fragment.DriverAllDeliveryListFragment;
 import com.wondermelonpapajoanne.joanne.parcel2go.fragment.PlaceOrderFragment;
 
 /**
@@ -24,88 +25,31 @@ import com.wondermelonpapajoanne.joanne.parcel2go.fragment.PlaceOrderFragment;
  */
 
 public class DriverMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PlaceOrderFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private int currentSelectedPosition;
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.driver_activity_main);
+        setContentView(R.layout.driver_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.driver_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerToggle.setDrawerIndicatorEnabled(false);
-        drawerLayout.addDrawerListener(drawerToggle);
+
         Menu menu = navigationView.getMenu();
         onNavigationItemSelected(menu.getItem(0));
-        drawerToggle.syncState();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-        Fragment fragment = null;
 
-        switch(id)
-        {
-            case R.id.nav_all_deliver_items:
-                fragment = new PlaceOrderFragment();
-                break;
-            case R.id.nav_delivery_history:
-                break;
-            case R.id.nav_my_profile:
-                break;
-            case R.id.nav_about_us:
-                break;
-            case R.id.nav_logout:
-                logout();
-                return true;
-            default:
-                fragment = new PlaceOrderFragment();
-        }
-
-        if(fragment != null){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        Fragment fragment = null;
-        switch(item.getItemId()){
-            case R.id.nav_all_deliver_items:
-                fragment = new PlaceOrderFragment();
-                break;
-            case R.id.nav_delivery_history:
-                break;
-            case R.id.nav_logout:
-                logout();
-                break;
-        }
-
-        if(fragment != null){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
@@ -117,36 +61,31 @@ public class DriverMainActivity extends AppCompatActivity
         }
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(STATE_SELECTED_POSITION, currentSelectedPosition);
-    }
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Fragment fragment = null;
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        currentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION, 0);
-        Menu menu = navigationView.getMenu();
-        menu.getItem(currentSelectedPosition).setChecked(true);
-    }
+        if (id == R.id.nav_pending_delivery) {
+            fragment = new DriverAllDeliveryListFragment();
+        } else if (id == R.id.nav_logout) {
+            logout();
+        }else
+            fragment = new DriverAllDeliveryListFragment();
 
-    private void setUpNavDrawerListener(NavigationView navigationView){
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener(){
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem){
-                        return true;
-                    }
-                }
-        );
-    }
+        if(fragment != null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+        }
 
-    @Override
-    public void onPlaceOrderFragmentInteraction(Uri uri) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     private void logout(){
+
         auth = FirebaseAuth.getInstance();
         auth.signOut();
         startActivity(new Intent(DriverMainActivity.this, LoginActivity.class));

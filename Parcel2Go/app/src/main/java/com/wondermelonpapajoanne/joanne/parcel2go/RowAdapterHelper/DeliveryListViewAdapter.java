@@ -11,33 +11,40 @@ import android.widget.Toast;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryInformation;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_DeliveryItem;
 import com.wondermelonpapajoanne.joanne.parcel2go.Model.FB_ReceiverInformation;
-import com.wondermelonpapajoanne.joanne.parcel2go.Model.GeneralDeliveryInfo;
 import com.wondermelonpapajoanne.joanne.parcel2go.R;
 
 import java.util.List;
 
 /**
- * Created by Sam on 10/3/2017.
+ * Created by Sam on 10/29/2017.
  */
 
-public class AllDeliveryListAdapter extends ArrayAdapter<FB_DeliveryInformation>{
+public class DeliveryListViewAdapter extends ArrayAdapter<FB_DeliveryInformation> {
 
     private final Context context;
     private List<FB_DeliveryInformation> deliveryList;
+    private LayoutInflater inflater;
 
-    public AllDeliveryListAdapter(Context context, List<FB_DeliveryInformation> deliveryList){
-        super(context, R.layout.driver_all_delivery_list_item, deliveryList);
+    public DeliveryListViewAdapter(Context context, List<FB_DeliveryInformation> deliveryList){
+        super(context, R.layout.driver_delivery_list_item , deliveryList);
 
         this.context = context;
         this.deliveryList = deliveryList;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public int getCount() {
+        return (deliveryList == null) ? 0 : deliveryList.size();
+    }
 
-        View rowView = inflater.inflate(R.layout.driver_all_delivery_list_item, parent, false);
+    public View getView(int position, View convertView, ViewGroup viewGroup){
+        if(inflater == null){
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        if(convertView == null){
+            convertView = inflater.inflate(R.layout.driver_delivery_list_item, viewGroup, false);
+        }
+
 
         if(deliveryList.size() > 0 ) {
             TextView DeliveryDescription = (TextView) convertView.findViewById(R.id.delivery_desscription);
@@ -56,7 +63,8 @@ public class AllDeliveryListAdapter extends ArrayAdapter<FB_DeliveryInformation>
             Toast.makeText(context, "No data", Toast.LENGTH_SHORT).show();
         }
 
-        return rowView;
+
+        return convertView;
     }
 
     private String getLocation(FB_ReceiverInformation receiver){
@@ -73,3 +81,4 @@ public class AllDeliveryListAdapter extends ArrayAdapter<FB_DeliveryInformation>
         return String.valueOf(price);
     }
 }
+

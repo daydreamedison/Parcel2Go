@@ -18,6 +18,11 @@
             android:id="@+id/nav_histories_order"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Histories Order" />
+
+        <item
+            android:id="@+id/nav_pending_delivery"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Pending Delivery List" />
     </group>
 
     <item android:title="Communicate">
